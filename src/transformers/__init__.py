@@ -243,6 +243,7 @@ _import_structure = {
     "models.m2m_100": ["M2M_100_PRETRAINED_CONFIG_ARCHIVE_MAP", "M2M100Config"],
     "models.marian": ["MarianConfig"],
     "models.maskformer": ["MASKFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP", "MaskFormerConfig"],
+    "models.markuplm": ["MARKUPLM_PRETRAINED_CONFIG_ARCHIVE_MAP", "MarkupLMConfig", "MarkupLMTokenizer"],
     "models.mbart": ["MBartConfig"],
     "models.mbart50": [],
     "models.megatron_bert": ["MEGATRON_BERT_PRETRAINED_CONFIG_ARCHIVE_MAP", "MegatronBertConfig"],
@@ -716,6 +717,7 @@ else:
     _import_structure["modeling_utils"] = ["PreTrainedModel"]
 
     # PyTorch models structure
+
     _import_structure["models.albert"].extend(
         [
             "ALBERT_PRETRAINED_MODEL_ARCHIVE_LIST",
@@ -1299,6 +1301,15 @@ else:
             "MaskFormerForInstanceSegmentation",
             "MaskFormerModel",
             "MaskFormerPreTrainedModel",
+    _import_structure["models.markuplm"].extend(
+        [
+            "MARKUPLM_PRETRAINED_MODEL_ARCHIVE_LIST",
+            "MarkupLMForQuestionAnswering",
+            "MarkupLMForSequenceClassification",
+            "MarkupLMForTokenClassification",
+            "MarkupLMLayer",
+            "MarkupLMModel",
+            "MarkupLMPreTrainedModel",
         ]
     )
     _import_structure["models.mbart"].extend(
@@ -2830,6 +2841,7 @@ if TYPE_CHECKING:
     from .models.m2m_100 import M2M_100_PRETRAINED_CONFIG_ARCHIVE_MAP, M2M100Config
     from .models.marian import MarianConfig
     from .models.maskformer import MASKFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP, MaskFormerConfig
+    from .models.markuplm import MARKUPLM_PRETRAINED_CONFIG_ARCHIVE_MAP, MarkupLMConfig, MarkupLMTokenizer
     from .models.mbart import MBartConfig
     from .models.megatron_bert import MEGATRON_BERT_PRETRAINED_CONFIG_ARCHIVE_MAP, MegatronBertConfig
     from .models.mmbt import MMBTConfig
@@ -3073,6 +3085,7 @@ if TYPE_CHECKING:
         from .models.led import LEDTokenizerFast
         from .models.longformer import LongformerTokenizerFast
         from .models.lxmert import LxmertTokenizerFast
+        from .models.markuplm import MarkupLMTokenizerFast
         from .models.mbart import MBartTokenizerFast
         from .models.mbart50 import MBart50TokenizerFast
         from .models.mobilebert import MobileBertTokenizerFast
@@ -3719,6 +3732,14 @@ if TYPE_CHECKING:
             MaskFormerForInstanceSegmentation,
             MaskFormerModel,
             MaskFormerPreTrainedModel,
+        from .models.markuplm import (
+            MARKUPLM_PRETRAINED_MODEL_ARCHIVE_LIST,
+            MarkupLMForQuestionAnswering,
+            MarkupLMForSequenceClassification,
+            MarkupLMForTokenClassification,
+            MarkupLMLayer,
+            MarkupLMModel,
+            MarkupLMPreTrainedModel,
         )
         from .models.mbart import (
             MBartForCausalLM,
