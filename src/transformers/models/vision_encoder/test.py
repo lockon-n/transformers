@@ -1,4 +1,5 @@
-from transformers import ResNetConfig, VisionEncoderConfig, VisionEncoder
+from transformers import ResNetConfig, VisionEncoder, VisionEncoderConfig
+
 
 config = VisionEncoderConfig(ResNetConfig())
 

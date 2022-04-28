@@ -333,7 +333,7 @@ class DetrConvEncoder(nn.Module):
 
         if config.use_timm_backbone:
             requires_backends(self, ["timm"])
-            
+
             kwargs = {}
             if config.dilation:
                 kwargs["output_stride"] = 16

@@ -2,15 +2,17 @@ from typing import Optional
 
 from torch import nn
 
-from transformers.models.auto.configuration_auto import AutoConfig
-from ...modeling_utils import PreTrainedModel
-from ...configuration_utils import PretrainedConfig
-from ...utils import logging
 from transformers import AutoConfig, AutoModel
+from transformers.models.auto.configuration_auto import AutoConfig
 
+from ...configuration_utils import PretrainedConfig
+from ...modeling_utils import PreTrainedModel
+from ...utils import logging
 from .configuration_vision_encoder import VisionEncoderConfig
 
+
 logger = logging.get_logger(__name__)
+
 
 class VisionEncoder(PreTrainedModel):
     r"""
@@ -37,14 +39,14 @@ class VisionEncoder(PreTrainedModel):
             encoder = AutoModel.from_config(config)
 
         self.encoder = encoder
-    
+
     def get_encoder(self):
         return self.encoder
-    
+
     @classmethod
     def from_pretrained(cls, *args, **kwargs):
         return super().from_pretrained(*args, **kwargs)
-    
+
     def forward(self, pixel_values=None, **kwargs):
         outputs = self.encoder(pixel_values, output_attentions=True, **kwargs)
 
