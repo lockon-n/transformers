@@ -28,6 +28,7 @@ logger = logging.get_logger(__name__)
 MODEL_MAPPING_NAMES = OrderedDict(
     [
         # Base model mapping
+        ("vision-encoder", "VisionEncoder"),
         ("dpt", "DPTModel"),
         ("decision_transformer", "DecisionTransformerModel"),
         ("glpn", "GLPNModel"),

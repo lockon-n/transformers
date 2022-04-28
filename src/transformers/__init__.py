@@ -35,7 +35,6 @@ from .utils import (
     is_sentencepiece_available,
     is_speech_available,
     is_tf_available,
-    is_timm_available,
     is_tokenizers_available,
     is_torch_available,
     is_vision_available,
@@ -295,6 +294,7 @@ _import_structure = {
     ],
     "models.van": ["VAN_PRETRAINED_CONFIG_ARCHIVE_MAP", "VanConfig"],
     "models.vilt": ["VILT_PRETRAINED_CONFIG_ARCHIVE_MAP", "ViltConfig", "ViltFeatureExtractor", "ViltProcessor"],
+    "models.vision_encoder": ["VisionEncoderConfig"],
     "models.vision_encoder_decoder": ["VisionEncoderDecoderConfig"],
     "models.vision_text_dual_encoder": ["VisionTextDualEncoderConfig", "VisionTextDualEncoderProcessor"],
     "models.visual_bert": ["VISUAL_BERT_PRETRAINED_CONFIG_ARCHIVE_MAP", "VisualBertConfig"],
@@ -401,7 +401,6 @@ _import_structure = {
         "is_sklearn_available",
         "is_speech_available",
         "is_tf_available",
-        "is_timm_available",
         "is_tokenizers_available",
         "is_torch_available",
         "is_torch_tpu_available",
@@ -558,23 +557,6 @@ else:
         name for name in dir(dummy_vision_objects) if not name.startswith("_")
     ]
 
-# Timm-backed objects
-if is_timm_available() and is_vision_available():
-    _import_structure["models.detr"].extend(
-        [
-            "DETR_PRETRAINED_MODEL_ARCHIVE_LIST",
-            "DetrForObjectDetection",
-            "DetrForSegmentation",
-            "DetrModel",
-            "DetrPreTrainedModel",
-        ]
-    )
-else:
-    from .utils import dummy_timm_objects
-
-    _import_structure["utils.dummy_timm_objects"] = [
-        name for name in dir(dummy_timm_objects) if not name.startswith("_")
-    ]
 
 if is_scatter_available():
     _import_structure["models.tapas"].extend(
@@ -935,6 +917,15 @@ if is_torch_available():
             "DeiTForMaskedImageModeling",
             "DeiTModel",
             "DeiTPreTrainedModel",
+        ]
+    )
+    _import_structure["models.detr"].extend(
+        [
+            "DETR_PRETRAINED_MODEL_ARCHIVE_LIST",
+            "DetrForObjectDetection",
+            "DetrForSegmentation",
+            "DetrModel",
+            "DetrPreTrainedModel",
         ]
     )
     _import_structure["models.distilbert"].extend(
@@ -1554,6 +1545,7 @@ if is_torch_available():
             "ViltPreTrainedModel",
         ]
     )
+    _import_structure["models.vision_encoder"].extend(["VisionEncoder"])
     _import_structure["models.vision_encoder_decoder"].extend(["VisionEncoderDecoderModel"])
     _import_structure["models.vision_text_dual_encoder"].extend(["VisionTextDualEncoderModel"])
     _import_structure["models.visual_bert"].extend(
@@ -2674,6 +2666,7 @@ if TYPE_CHECKING:
     from .models.unispeech_sat import UNISPEECH_SAT_PRETRAINED_CONFIG_ARCHIVE_MAP, UniSpeechSatConfig
     from .models.van import VAN_PRETRAINED_CONFIG_ARCHIVE_MAP, VanConfig
     from .models.vilt import VILT_PRETRAINED_CONFIG_ARCHIVE_MAP, ViltConfig, ViltFeatureExtractor, ViltProcessor
+    from .models.vision_encoder import VisionEncoderConfig
     from .models.vision_encoder_decoder import VisionEncoderDecoderConfig
     from .models.vision_text_dual_encoder import VisionTextDualEncoderConfig, VisionTextDualEncoderProcessor
     from .models.visual_bert import VISUAL_BERT_PRETRAINED_CONFIG_ARCHIVE_MAP, VisualBertConfig
@@ -2783,7 +2776,6 @@ if TYPE_CHECKING:
         is_sklearn_available,
         is_speech_available,
         is_tf_available,
-        is_timm_available,
         is_tokenizers_available,
         is_torch_available,
         is_torch_tpu_available,
@@ -2905,17 +2897,6 @@ if TYPE_CHECKING:
         from .utils.dummy_vision_objects import *
 
     # Modeling
-    if is_timm_available() and is_vision_available():
-        from .models.detr import (
-            DETR_PRETRAINED_MODEL_ARCHIVE_LIST,
-            DetrForObjectDetection,
-            DetrForSegmentation,
-            DetrModel,
-            DetrPreTrainedModel,
-        )
-    else:
-        from .utils.dummy_timm_objects import *
-
     if is_scatter_available():
         from .models.tapas import (
             TAPAS_PRETRAINED_MODEL_ARCHIVE_LIST,
@@ -3222,6 +3203,13 @@ if TYPE_CHECKING:
             DeiTForMaskedImageModeling,
             DeiTModel,
             DeiTPreTrainedModel,
+        )
+        from .models.detr import (
+            DETR_PRETRAINED_MODEL_ARCHIVE_LIST,
+            DetrForObjectDetection,
+            DetrForSegmentation,
+            DetrModel,
+            DetrPreTrainedModel,
         )
         from .models.distilbert import (
             DISTILBERT_PRETRAINED_MODEL_ARCHIVE_LIST,
@@ -3731,6 +3719,7 @@ if TYPE_CHECKING:
             ViltModel,
             ViltPreTrainedModel,
         )
+        from .models.vision_encoder import VisionEncoder
         from .models.vision_encoder_decoder import VisionEncoderDecoderModel
         from .models.vision_text_dual_encoder import VisionTextDualEncoderModel
         from .models.visual_bert import (

@@ -78,10 +78,14 @@ class DetrConfig(PretrainedConfig):
             Whether auxiliary decoding losses (loss at each decoder layer) are to be used.
         position_embedding_type (`str`, *optional*, defaults to `"sine"`):
             Type of position embeddings to be used on top of the image features. One of `"sine"` or `"learned"`.
+        use_timm_backbone (`bool`, *optional*, defaults to `True`):
+            Whether to use the timm package for the convolutional backbone.
         backbone (`str`, *optional*, defaults to `"resnet50"`):
-            Name of convolutional backbone to use. Supports any convolutional backbone from the timm package. For a
-            list of all available models, see [this
-            page](https://rwightman.github.io/pytorch-image-models/#load-a-pretrained-model).
+            Name of convolutional backbone to use. Could be either:
+            - a Transformers-compatible ResNet backbone from the [hub](https://huggingface.co/models?other=resnet)
+            - any convolutional backbone from the timm package (see [this
+              page](https://rwightman.github.io/pytorch-image-models/#load-a-pretrained-model) for a list of all
+              available models).
         dilation (`bool`, *optional*, defaults to `False`):
             Whether to replace stride with dilation in the last convolutional block (DC5).
         class_cost (`float`, *optional*, defaults to 1):
@@ -146,6 +150,7 @@ class DetrConfig(PretrainedConfig):
         scale_embedding=False,
         auxiliary_loss=False,
         position_embedding_type="sine",
+        use_timm_backbone=True,
         backbone="resnet50",
         dilation=False,
         class_cost=1,
@@ -179,6 +184,7 @@ class DetrConfig(PretrainedConfig):
         self.scale_embedding = scale_embedding  # scale factor will be sqrt(d_model) if True
         self.auxiliary_loss = auxiliary_loss
         self.position_embedding_type = position_embedding_type
+        self.use_timm_backbone = use_timm_backbone
         self.backbone = backbone
         self.dilation = dilation
         # Hungarian matcher
