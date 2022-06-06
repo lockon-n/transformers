@@ -259,11 +259,11 @@ _import_structure = {
     "models.lxmert": ["LXMERT_PRETRAINED_CONFIG_ARCHIVE_MAP", "LxmertConfig", "LxmertTokenizer"],
     "models.m2m_100": ["M2M_100_PRETRAINED_CONFIG_ARCHIVE_MAP", "M2M100Config"],
     "models.marian": ["MarianConfig"],
-     "models.markuplm": [
+    "models.markuplm": [
         "MARKUPLM_PRETRAINED_CONFIG_ARCHIVE_MAP",
         "MarkupLMConfig",
-        "MarkupLMTokenizer",
         "MarkupLMFeatureExtractor",
+        "MarkupLMTokenizer",
     ],
     "models.maskformer": ["MASKFORMER_PRETRAINED_CONFIG_ARCHIVE_MAP", "MaskFormerConfig"],
     "models.mbart": ["MBartConfig"],
@@ -1460,6 +1460,8 @@ else:
             "MaskFormerForInstanceSegmentation",
             "MaskFormerModel",
             "MaskFormerPreTrainedModel",
+        ]
+    )
     _import_structure["models.markuplm"].extend(
         [
             "MARKUPLM_PRETRAINED_MODEL_ARCHIVE_LIST",
@@ -4142,11 +4144,6 @@ if TYPE_CHECKING:
             M2M100PreTrainedModel,
         )
         from .models.marian import MarianForCausalLM, MarianModel, MarianMTModel
-        from .models.maskformer import (
-            MASKFORMER_PRETRAINED_MODEL_ARCHIVE_LIST,
-            MaskFormerForInstanceSegmentation,
-            MaskFormerModel,
-            MaskFormerPreTrainedModel,
         from .models.markuplm import (
             MARKUPLM_PRETRAINED_MODEL_ARCHIVE_LIST,
             MarkupLMForQuestionAnswering,
@@ -4155,6 +4152,12 @@ if TYPE_CHECKING:
             MarkupLMLayer,
             MarkupLMModel,
             MarkupLMPreTrainedModel,
+        )
+        from .models.maskformer import (
+            MASKFORMER_PRETRAINED_MODEL_ARCHIVE_LIST,
+            MaskFormerForInstanceSegmentation,
+            MaskFormerModel,
+            MaskFormerPreTrainedModel,
         )
         from .models.mbart import (
             MBartForCausalLM,
