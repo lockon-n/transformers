@@ -1030,6 +1030,7 @@ class XGLMConverter(SpmConverter):
             ],
         )
 
+
 class MarkupLMConverter(Converter):
     def converted(self) -> Tokenizer:
         ot = self.original_tokenizer
@@ -1066,6 +1067,7 @@ class MarkupLMConverter(Converter):
         )
 
         return tokenizer
+
 
 SLOW_TO_FAST_CONVERTERS = {
     "AlbertTokenizer": AlbertConverter,
